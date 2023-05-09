@@ -1,0 +1,27 @@
+/* 
+    General Styles
+*/
+body {
+    background-color: black;
+  }
+  
+  .nav-link {
+    color: rgb(228, 228, 222);
+    font-weight: 600;
+  }
+  
+  .nav-link:hover {
+    color: rgb(255, 255, 255);
+  
+  }
+  
+  .as {
+   margin: auto;
+  }
+  
+  .bb {
+    border: 1px solid white;
+  }
+  
+  
+  
