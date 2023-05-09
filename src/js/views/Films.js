@@ -5,19 +5,13 @@ import { Context } from "../store/appContext";
 import { useContext } from "react";
 
 export const Films = () => {
-  const [film, setFilm] = useState([]);
-  const { store, actions } = useContext(Context);
-
-  useEffect(() => {
-    console.log(actions.getInfoFilms());
-    setFilm(actions.getInfoFilms);
-  }, []);
+  const { store } = useContext(Context);
 
   return (
     <>
       <div className="row justify-content-center">
-        {film.length !== 0 ? (
-          film.result.map(({ properties, uid }) => (
+        {store.swFilms.length !== 0 ? (
+          store.swFilms.result.map(({ properties, uid }) => (
             <Cards
               key={uid}
               img={`https://starwars-visualguide.com/assets/img/films/${uid}.jpg`}

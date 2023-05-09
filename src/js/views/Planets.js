@@ -1,29 +1,20 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Cards } from "../component/Cards";
 import React from "react";
+import { Context } from "../store/appContext";
 
 const Planets = () => {
+  const { store } = useContext(Context);
   const [planets, setPlanets] = useState([]);
   const [url, setUrl] = useState("https://www.swapi.tech/api/planets/");
 
-  useEffect(() => {
-    try {
-      const getInfoPlanets = async () => {
-        const res = await fetch(url);
-        const data = await res.json();
-        setPlanets(data);
-      };
-      getInfoPlanets();
-    } catch (error) {
-      console.log("error", error);
-    }
-  }, [url]);
+  useEffect(() => {}, []);
 
   return (
     <>
       <div className="row justify-content-center">
-        {planets.length !== 0 ? (
-          planets.results.map(({ name, url, uid }) => (
+        {store.swPlanets.length !== 0 ? (
+          store.swPlanets.results.map(({ name, url, uid }) => (
             <Cards
               img={`https://starwars-visualguide.com/assets/img/planets/${uid}.jpg`}
               url={`/Planets/${uid}`}
@@ -39,20 +30,20 @@ const Planets = () => {
         <button
           className="btn btn-secondary bb"
           disabled={
-            planets.next ===
+            store.swPlanets.next ===
             "https://www.swapi.tech/api/planets?page=6&limit=10"
           }
           onClick={() => {
-            setUrl(planets.next);
+            setUrl(store.swPlanets.next);
           }}
         >
           Next
         </button>
         <button
           className="btn btn-secondary mx-2 bb"
-          disabled={planets.previous === null}
+          disabled={store.swPlanets.previous === null}
           onClick={() => {
-            setUrl(planets.previous);
+            setUrl(store.swPlanets.previous);
           }}
         >
           Previous

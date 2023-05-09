@@ -11,12 +11,39 @@ const getState = ({ getStore, getActions, setStore }) => {
       exampleFunction: () => {
         getActions().changeColor(0, "green");
       },
-      loadSomeData: async () => {
+      getInfoFilms: async () => {
         try {
-          console.log("loadSomeData");
           const res = await fetch("https://swapi.tech/api/films/");
+
           const data = await res.json();
           setStore({ swFilms: data });
+        } catch (error) {
+          console.log("error", error);
+        }
+      },
+      getInfoPeople: async () => {
+        try {
+          const res = await fetch("https://swapi.tech/api/people/");
+          const data = await res.json();
+          setStore({ swPeople: data });
+        } catch (error) {
+          console.log("error", error);
+        }
+      },
+      getInfoStarship: async () => {
+        try {
+          const res = await fetch("https://swapi.tech/api/starships/");
+          const data = await res.json();
+          setStore({ swStarship: data });
+        } catch (error) {
+          console.log("error", error);
+        }
+      },
+      getInfoPlanet: async () => {
+        try {
+          const res = await fetch("https://swapi.tech/api/planets/");
+          const data = await res.json();
+          setStore({ swPlanets: data });
         } catch (error) {
           console.log("error", error);
         }

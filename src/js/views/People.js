@@ -1,29 +1,18 @@
 import { Cards } from "../component/Cards";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import React from "react";
+import { Context } from "../store/appContext";
 
 export const People = () => {
-  const [people, setPeople] = useState([]);
-  const [url, setUrl] = useState("https://www.swapi.tech/api/people/");
+  const { store } = useContext(Context);
 
-  useEffect(() => {
-    try {
-      const getInfoPeople = async () => {
-        const res = await fetch(url);
-        const data = await res.json();
-        setPeople(data);
-      };
-      getInfoPeople();
-    } catch (error) {
-      console.log("error", error);
-    }
-  }, [url]);
+  console.log(store.swPeople);
 
   return (
     <>
       <div className="row justify-content-center">
-        {people.length !== 0 ? (
-          people.results.map(({ name, url, uid }) => (
+        {store.swPeople.length !== 0 ? (
+          store.swPeople.results.map(({ name, url, uid }) => (
             <Cards
               img={`https://starwars-visualguide.com/assets/img/characters/${uid}.jpg`}
               key={uid}
@@ -36,28 +25,29 @@ export const People = () => {
         )}
       </div>
 
-      <div className="d-flex justify-content-center mb-4">
+      {/* <div className="d-flex justify-content-center mb-4">
         <button
           className="btn btn-secondary bb"
           disabled={
-            people.next === "https://www.swapi.tech/api/people?page=9&limit=10"
+            store.swPeople.next ===
+            "https://www.swapi.tech/api/people?page=9&limit=10"
           }
           onClick={() => {
-            setUrl(people.next);
+            setUrl(store.swPeople.next);
           }}
         >
           Next
         </button>
         <button
           className="btn btn-secondary mx-2 bb"
-          disabled={people.previous === null}
+          disabled={store.swPeople.previous === null}
           onClick={() => {
-            setUrl(people.previous);
+            setUrl(store.swPeople.previous);
           }}
         >
           Previous
         </button>
-      </div>
+      </div> */}
     </>
   );
 };
