@@ -25,7 +25,7 @@ const injectContext = (PassedComponent) => {
       state.actions.getInfoFilms();
       state.actions.getInfoPeople();
       state.actions.getInfoStarship();
-      state.actions.getInfoPlanet();
+      state.actions.getInfoPlanet("https://swapi.tech/api/planets/");
     }, []);
 
     return (

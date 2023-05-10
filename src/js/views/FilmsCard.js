@@ -28,7 +28,7 @@ export const FilmCards = () => {
           <div className="row g-0">
             <div className="col-md-4">
               <img
-                src={`https://starwars-visualguide.com/assets/img/films/1.jpg`}
+                src={`https://starwars-visualguide.com/assets/img/films/${uid}.jpg`}
                 className="img-fluid rounded-start"
                 alt="..."
               />

@@ -1,7 +1,11 @@
 import { Link } from "react-router-dom";
-import React from "react";
+import React, { useContext, useState } from "react";
+import { Context } from "../store/appContext";
 
-export const Cards = ({ img, text, title, url }) => {
+export const Cards = ({ img, text, title, url, onClick }) => {
+  const [active, setActive] = useState(false);
+  const { actions } = useContext(Context);
+
   return (
     <div className="card m-4 col-4 p-0" style={{ width: "18rem" }}>
       <img src={img} className="card-img-top" alt="..." />
@@ -12,8 +16,17 @@ export const Cards = ({ img, text, title, url }) => {
           <Link to={url} className="btn btn-primary ">
             More Info!
           </Link>
-          <button type="button" className="btn btn-light">
-            <i class="bi bi-heart"></i>
+          <button
+            onClick={() => {
+              active
+                ? actions.deleteFavorite(title)
+                : actions.getFavorite(title);
+              setActive(!active);
+            }}
+            type="button"
+            className="btn btn-light"
+          >
+            <i className={`bi ${active ? "bi-heart-fill" : "bi-heart"}`}></i>
           </button>
         </div>
       </div>

@@ -5,7 +5,9 @@ import { Context } from "../store/appContext";
 import { useContext } from "react";
 
 export const Films = () => {
-  const { store } = useContext(Context);
+  const { store, actions } = useContext(Context);
+
+  useEffect(() => {});
 
   return (
     <>

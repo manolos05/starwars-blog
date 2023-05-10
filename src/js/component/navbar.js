@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import { Link } from "react-router-dom";
+import { Context } from "../store/appContext";
 
 export const Navbar = () => {
+  const { store, actions } = useContext(Context);
+  const { swFavorites } = store;
   const menu = ["People", "Films", "Starship", "Planets"];
   const SocialMedia = [
     {
@@ -82,10 +85,20 @@ export const Navbar = () => {
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                Favorites
+                {swFavorites.length} Favorites
               </a>
               <ul className="dropdown-menu">
-                <li>Hola</li>
+                {swFavorites.map((fav, i) => {
+                  return (
+                    <li key={fav}>
+                      {fav}{" "}
+                      <i
+                        class="bi bi-trash"
+                        onClick={() => actions.deleteFavorite(fav)}
+                      ></i>
+                    </li>
+                  );
+                })}
               </ul>
             </li>
           </ul>
